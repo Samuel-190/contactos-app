@@ -9,22 +9,22 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $b=$consul->fetchALL(PDO::FETCH_ASSOC);
     foreach($b as $s) {
         if($s['correo']===$email) {
-            $errores[]="<h3>El correo ingresado ya existe, agrega otro por favor</h3>";
+            $errores[]="<h3 style='color: red;'>El correo ingresado ya existe, agrega otro por favor.</h3>";
             break;
         }
     }
-    if (empty($nombre)) {
-        $errores[]="<h3>El nombre es obligatorio</h3>";
+    if (empty($name)) {
+        $errores[]="<h3 style='color: red;'>El nombre es obligatorio.</h3>";
     }
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $errores[]="<h3>El email no es válido</h3>";
+        $errores[]="<h3 style='color: red;'>El email no es válido.</h3>";
     }
     if(empty($errores)) {
        $passwordh=password_hash($password, PASSWORD_DEFAULT);
        $consul=$conexion->prepare("INSERT INTO usuarios (nombre, correo, clave) VALUES (?, ?, ?)");
-       $exito=$consul->execute([$nombre, $email, $passwordh]);
+       $exito=$consul->execute([$name, $email, $passwordh]);
        if ($exito) {
-          echo "<h3>¡Registro exitoso!</h3>";
+          echo "<h3 style='color: green;'>¡Registro exitoso! :)</h3>";
        } else {
           echo "Error: " . $consul->$error;
        }
