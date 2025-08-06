@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
        } else {
           echo "Error: " . $consul->$error;
        }
-       $stmt=null;
+       $consul=null;
        $conexion=null;
     } else {
         // Mostrar errores
