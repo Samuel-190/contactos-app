@@ -13,8 +13,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             break;
         }
     }
-    if (empty($name)) {
+    if (empty(trim($name))) {
         $errores[]="<h3 style='color: red;'>El nombre es obligatorio.</h3>";
+    }
+    if (empty(trim($password))) {
+        $errores[]="<h3 style='color: red;'>La contraseña no la especificaste.</h3>";
     }
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $errores[]="<h3 style='color: red;'>El email no es válido.</h3>";
@@ -24,7 +27,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
        $consul=$conexion->prepare("INSERT INTO usuarios (nombre, correo, clave) VALUES (?, ?, ?)");
        $exito=$consul->execute([$name, $email, $passwordh]);
        if ($exito) {
-          echo "<h3 style='color: green;'>¡Registro exitoso! :)</h3>";
+          echo "<h3 style='color: green;'>¡Registro exitoso! :)</h3>";?>
+          <a href="index.php"><button>Ir a inicio de sesíon</button></a><?php
        } else {
           echo "Error: " . $consul->$error;
        }
