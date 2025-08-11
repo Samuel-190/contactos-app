@@ -53,5 +53,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             Contraseña: <input type="password" name="clave" required><br><br>
             <input type="submit" value="enviar">
         </form>
+        <br>¿ Ya tienes cuenta ?, inicia sesíon  <a href="index.php">Aquí</a>
     </body>
 </html>

@@ -54,5 +54,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
            Clave: <input type="password" name="clave" required><br><br>
            <input type="submit" value="Enviar">
         </form>
+        <br>¿ Aun no tienes cuenta ?, create una  <a href="agregar.php">Aquí</a>
     </body>
 </html>
