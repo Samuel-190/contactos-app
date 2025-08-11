@@ -13,7 +13,11 @@ $conec->execute([$user_id]);
 $listar=$conec->fetchALL(PDO::FETCH_ASSOC);
 if(empty($listar)) {
     echo "<h2>No tienes contactos almacenados</h2>";
-    ?><br><form method='POST' action=''><input type='submit' value='Crear nuevo contacto🖌️​' name='crear'></form><?php
+    ?><br><form method='POST' action=''>
+              <input type='submit' value='Crear nuevo contacto🖌️​' name='crear'>
+              <input style='color: red; float: right;' type='submit' value='Cerrar sesíon​' name='cerrar'>
+         </form>
+    <?php
 }else{
     echo "<h2>Tu lista de contactos:</h2>";
     echo "<table border='1' cellpadding='5'>";
