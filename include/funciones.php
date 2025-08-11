@@ -75,6 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $exito=$ingre->execute([$user_id, $name, $tel, $correo]);
             if ($exito) {
                 echo "<h3 style='color: green;'>¡Contacto creado con exito! :)</h3>";
+                header("Refresh:1; url=funciones.php");
             } else {
                 echo "<h3>Tu contacto no se pudo crear debido a un problema, intentalo de nuevo</h3>";
             }
@@ -102,6 +103,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
        $id = $_POST['id'];
        $sacar=$conexion->query("DELETE FROM contactos WHERE id=".$id);
        echo "<h2>Contacto eliminado con exito.</h2>";
+       header("Refresh:1; url=funciones.php");
     }elseif(isset($_POST['cancelar'])) {
         echo "";
     }
@@ -143,6 +145,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $exito=$update->execute([$nombre, $id]);
             if ($exito) {
                 echo "<h3 style='color: green;'>¡Cambio creado con exito! :)</h3>";
+                header("Refresh:1; url=funciones.php");
             } else {
                 echo "<h3>Tu cambio no se pudo crear debido a un problema, intentalo de nuevo</h3>";
             }
@@ -173,6 +176,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $exito=$update->execute([$tel, $id]);
             if ($exito) {
                 echo "<h3 style='color: green;'>¡Cambio creado con exito! :)</h3>";
+                header("Refresh:1; url=funciones.php");
             } else {
                 echo "<h3>Tu cambio no se pudo crear debido a un problema, intentalo de nuevo</h3>";
             }
@@ -203,6 +207,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $exito=$update->execute([$correo, $id]);
             if ($exito) {
                 echo "<h3 style='color: green;'>¡Cambio creado con exito! :)</h3>";
+                header("Refresh:1; url=funciones.php");
             } else {
                 echo "<h3>Tu cambio no se pudo crear debido a un problema, intentalo de nuevo</h3>";
             }
