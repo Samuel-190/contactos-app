@@ -1,6 +1,6 @@
 # APLICACÍON DE GESTION DE CONTACTOS
 
-Este proyecto consiste en una aplicacion web basica para adminitristar contactos, el usuario puede registrarse y iniciar sesíon para acceder a su panel de administracion, en el mismo podra gestionar sus contactos.
+Este proyecto consiste en una aplicacion web para adminitristar contactos, el usuario puede registrarse y iniciar sesíon para acceder a su panel de administracion, en el mismo podra gestionar sus contactos.
 
 ## 📥 Cómo instalar
 
@@ -23,10 +23,12 @@ Para eso esta el `agregar.php`:
 
 - Aqui el usuario podra registrarse y asi poder existir en la base de datos y por fin poder iniciar sesíon.
 
-Podras acceder a el, navegando en la URL, algo asi: `localhost:5000/agregar.php`, solo es especificar la ruta y ya esta.
+Podras acceder a el de 3 maneras, la primera es dar clic en el `Aquí` del inicio de sesíon, la segunda es navegando en la URL de esta manera: `localhost:5000/agregar.php`. Y la tercera deberas descubrirla por ti mismo.
+
+- Para terminar, no olvides revisar las credenciales en el `database.php`, puede que tu `$usuario` y `$pass` sean diferentes, de lo contrario php podria tener problemas para conectarse con tu base de datos. 
 
 
-- Y ya esta, de lo demas la aplicacion se encargara, solo sigue y lee las intrucciones que aparezcan en pantalla, a medida que usas la app.
+Y ya esta, de lo demas la aplicacion se encargara, solo sigue y lee las intrucciones que aparezcan en pantalla, a medida que usas la app.
 
 ## 🔩​ Estructura del repositorio
 
