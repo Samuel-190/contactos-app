@@ -118,21 +118,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
        <h2>Por favor selecciona que campo quieres modificar:</h3>
        <br><form method='POST' action=''>
                <input type='hidden' name='id' value='<?php echo $id; ?>'>
-               <input type='submit' value='Nombre​' name='nombre'>
-               <input type='submit' value='Telefono' name='telefono'>
-               <input type='submit' value='Correo​' name='correo'>
+               <input type='submit' value='Nombre​' name='name'>
+               <input type='submit' value='Telefono' name='celular'>
+               <input type='submit' value='Correo​' name='email'>
             </form>
        <?php
     }
     //Modificar nombre
-    if (isset($_POST['nombre'])) {
+    if (isset($_POST['name'])) {
        $id = $_POST['id'];
        ?>
        <h2>Especifica el nuevo nombre para tu contacto:</h3>
        <br><form method='POST' action=''>
                <input type='hidden' name='id' value='<?php echo $id; ?>'>
                <input type="hidden" name="action" value="enviado">
-               Nuevo nombre: <input type='text' name='nombre' required>
+               Nuevo nombre: <input type='text' name='nombre'>
                <input type="submit" value="enviar">
             </form>
        <?php
@@ -153,22 +153,27 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             } else {
                 echo "<h3>Tu cambio no se pudo crear debido a un problema, intentalo de nuevo</h3>";
             }
+        }else{
+            foreach ($errores as $error) {
+                echo "<div class='error'>$error</div>";
+            }
+            header("Refresh:2; url=funciones.php");
         }
     }
     //Modificar telefono
-    if (isset($_POST['telefono'])) {
+    if (isset($_POST['celular'])) {
        $id = $_POST['id'];
        ?>
        <h2>Especifica el nuevo telefono para tu contacto:</h3>
        <br><form method='POST' action=''>
                <input type='hidden' name='id' value='<?php echo $id; ?>'>
-               <input type="hidden" name="action" value="enviado">
-               Nuevo telefono: <input type='text' name='tel' required>
+               <input type="hidden" name="action" value="listo">
+               Nuevo telefono: <input type='text' name='tel'>
                <input type="submit" value="enviar">
             </form>
        <?php
     }
-    if (isset($_POST['action']) && $_POST['action'] === 'enviado') {
+    if (isset($_POST['action']) && $_POST['action'] === 'listo') {
        $tel=preg_replace("/[^0-9]/", "", $_POST['tel'] ?? '');
        $id=$_POST['id'];
        $errores=[];
@@ -184,27 +189,35 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             } else {
                 echo "<h3>Tu cambio no se pudo crear debido a un problema, intentalo de nuevo</h3>";
             }
+        }else{
+            foreach ($errores as $error) {
+                echo "<div class='error'>$error</div>";
+            }
+            header("Refresh:2; url=funciones.php");
         }
     }
     //Modificar correo
-    if (isset($_POST['correo'])) {
+    if (isset($_POST['email'])) {
        $id = $_POST['id'];
        ?>
        <h2>Especifica el nuevo correo para tu contacto:</h3>
        <br><form method='POST' action=''>
                <input type='hidden' name='id' value='<?php echo $id; ?>'>
-               <input type="hidden" name="action" value="enviado">
+               <input type="hidden" name="action" value="ok">
                Nuevo correo: <input type='email' name='correo' required>
                <input type="submit" value="enviar">
             </form>
        <?php
     }
-    if (isset($_POST['action']) && $_POST['action'] === 'enviado') {
+    if (isset($_POST['action']) && $_POST['action'] === 'ok') {
        $correo=filter_var($_POST['correo'] ?? '', FILTER_SANITIZE_EMAIL);
        $id=$_POST['id'];
        $errores=[];
         if (empty(trim($correo))) {
            $errores[]="<h3 style='color: red;'>No has especificado el correo aun.</h3>";
+        }
+        if (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
+           $errores[]="<h3 style='color: red;'>El email no es válido.</h3>";
         }
         if(empty($errores)) {
             $update=$conexion->prepare("UPDATE contactos SET correo= ? WHERE id= ? ");
@@ -215,6 +228,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             } else {
                 echo "<h3>Tu cambio no se pudo crear debido a un problema, intentalo de nuevo</h3>";
             }
+        }else{
+            foreach ($errores as $error) {
+               echo "<div class='error'>$error</div>";
+            }
+            header("Refresh:2; url=funciones.php");
         }
     }
     if (isset($_POST['cerrar'])) {
